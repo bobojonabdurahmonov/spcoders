@@ -1,0 +1,499 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-bg {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: darken;
+  padding: 25px 50px;
+  position: relative;
+}
+
+/* --- NAVBAR --- */
+.entrynav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logo img {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.logo:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.nav-links li:hover {
+  opacity: 0.8;
+}
+
+/* --- BUTTONS --- */
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  background: white;
+  color: black;
+  border: 2px solid white;
+  padding: 10px 26px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: black;
+  color: white;
+  border: 2px solid black;
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  background: black;
+  color: white;
+  border: 2px solid black;
+  padding: 10px 26px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: black;
+  border: 2px solid white;
+  transform: scale(1.05);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.hero-title {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.hero-title span {
+  color: #00bfff;
+}
+
+.hero-subtitle {
+  margin-top: 18px;
+  font-size: 16px;
+  color: #ddd;
+}
+
+/* --- MIDDLE SECTION --- */
+.middlenav {
+  text-align: center;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.middlenav h1 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.middlenav h2 {
+  font-size: 70px;
+  margin-top: -80px;
+}
+
+.middlenav span {
+  margin-top: 18px;
+}
+
+.middlenav button {
+  background: white;
+  color: black;
+  border: 2px solid white;
+  padding: 12px 40px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.middlenav button:hover {
+  background: black;
+  color: white;
+  border: 2px solid black;
+  transform: scale(1.05);
+}
+
+.aboutblock {
+  width: 100%;
+  max-width: 1000px;
+  background: rgba(35, 35, 35, 0.9); /* lighter than main bg */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 45px 60px;
+  border-radius: 25px;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
+  transition: all 0.3s ease;
+  margin: 0px auto 100px auto;
+  margin-top: 10px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.aboutblock:hover {
+  box-shadow: 0 0 30px rgba(0, 191, 255, 0.25);
+  transform: scale(1.01);
+}
+
+.aboutblock ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.aboutblock li {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.aboutblock li:hover {
+  transform: translateY(-4px);
+}
+
+.aboutblock h1 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.aboutblock h2 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #00bfff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+
+.community-text {
+  position: relative;
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 80px 0 40px 0;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.community-text span {
+  color: #00bfff;
+}
+
+/* --- SERVICES BLOCK --- */
+.services-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  max-width: 1100px;
+  padding: 20px;
+}
+
+.service-card {
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px 25px;
+  width: 250px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+}
+
+.service-card h2 {
+  font-size: 18px;
+  color: #00bfff;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.service-card p {
+  font-size: 14px;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+.service-icon {
+  font-size: 35px;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  color: #00bfff;
+  transform: scale(1.1);
+}
+
+/* Responsive for Services */
+@media (max-width: 768px) {
+  .services-block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card {
+    width: 80%;
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .aboutblock {
+    padding: 30px 20px;
+  }
+
+  .aboutblock h1 {
+    font-size: 26px;
+  }
+
+  .aboutblock h2 {
+    font-size: 13px;
+  }
+
+  .aboutblock ul {
+    gap: 25px;
+  }
+}
+
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+/* 📱 Mobil (600px gacha) */
+@media (max-width: 600px) {
+  .main-bg {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .entrynav {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn, .btn-outline {
+    width: 80%;
+    font-size: 14px;
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .middlenav h1 {
+    font-size: 18px;
+  }
+
+  .middlenav h2 {
+    font-size: 30px;
+  }
+
+  .middlenav button {
+    font-size: 14px;
+    padding: 10px 30px;
+  }
+}
+
+/* 💻 Planshet (601px – 900px) */
+@media (max-width: 900px) and (min-width: 601px) {
+  .main-bg {
+    padding: 30px 40px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .middlenav h1 {
+    font-size: 22px;
+  }
+
+  .middlenav h2 {
+    font-size: 40px;
+  }
+}
+/* --- SLIDER PAGES --- */
+.slide-page {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 40px;
+  text-align: center;
+}
+
+.page-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Dots color */
+.slick-dots li button:before {
+  color: white !important;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #00bfff !important;
+  opacity: 1;
+}
+
+/* --- SLIDER PAGES --- */
+.slide-page {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  gap: 40px;
+  text-align: center;
+}
+
+.page-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Dots style */
+.slick-dots li button:before {
+  color: white !important;
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #00bfff !important;
+  opacity: 1;
+}
+
+/* Navbar hover indication */
+.nav-links li {
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #00bfff;
+  transform: scale(1.05);
+}
