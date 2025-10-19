@@ -1,0 +1,110 @@
+.profil-sahifa {
+  padding: 40px;
+  color: #e8e8e8;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.profil-bosh {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px 25px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profil-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #4fc3f7;
+  box-shadow: 0 0 10px #4fc3f7;
+}
+
+.profil-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profil-nomi {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profil-tag {
+  color: #999;
+  font-size: 14px;
+}
+
+.profil-bio {
+  font-size: 15px;
+  color: #ccc;
+}
+
+.profil-statlar {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-soni {
+  font-size: 22px;
+  font-weight: 700;
+  color: #4fc3f7;
+}
+
+.stat-nomi {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.profil-harakatlar {
+  display: flex;
+  gap: 10px;
+}
+
+.tugma-asosiy,
+.tugma-outline {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tugma-asosiy {
+  background: linear-gradient(90deg, #4fc3f7, #1976d2);
+  border: none;
+  color: white;
+}
+
+.tugma-outline {
+  background: transparent;
+  border: 1px solid #4fc3f7;
+  color: #4fc3f7;
+}
+
+.tugma-outline:hover {
+  background: #4fc3f7;
+  color: #fff;
+}
+
+.tugma-asosiy:hover {
+  opacity: 0.8;
+}

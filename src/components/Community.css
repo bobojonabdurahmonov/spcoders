@@ -1,0 +1,131 @@
+.jamiyat {
+  background: linear-gradient(180deg, #0b0b0d 0%, #0d1117 100%);
+  color: #e6edf3;
+  font-family: "Inter", sans-serif;
+  padding: 60px 10%;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.jamiyat-bosh {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.jamiyat-bosh h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #00bcd4, #2196f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+.jamiyat-ta’rif {
+  max-width: 600px;
+  margin: 0 auto;
+  color: #aaa;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.join-btn {
+  background: linear-gradient(90deg, #0078ff, #00bcd4);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 25px;
+  transition: 0.3s;
+}
+.join-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #00bcd4;
+}
+
+/* BO‘LIMLAR */
+.jamiyat-bo‘limlar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-bottom: 60px;
+}
+.bo‘lim {
+  background: #111;
+  border: 1px solid #222;
+  padding: 25px;
+  border-radius: 14px;
+  transition: 0.3s;
+}
+.bo‘lim:hover {
+  border-color: #00bcd4;
+  transform: translateY(-6px);
+  box-shadow: 0 0 15px rgba(0, 188, 212, 0.2);
+}
+.bo‘lim h2 {
+  color: #00bcd4;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.bo‘lim p {
+  color: #bbb;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* STATISTIKA */
+.jamiyat-stat {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 70px;
+}
+.stat-blok {
+  background: #0f141a;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 30px 40px;
+  text-align: center;
+  width: 240px;
+  transition: 0.3s;
+}
+.stat-blok:hover {
+  border-color: #00bcd4;
+  transform: translateY(-6px);
+}
+.stat-blok h3 {
+  font-size: 1.8rem;
+  color: #00bcd4;
+  margin-bottom: 8px;
+}
+
+/* HAVOLALAR */
+.jamiyat-havolalar {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.jamiyat-havolalar h2 {
+  color: #00bcd4;
+  margin-bottom: 18px;
+}
+.jamiyat-havolalar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  text-align: center;
+  align-items: center;
+  margin-left: 500px;
+}
+.jamiyat-havolalar li {
+  margin: 10px 0;
+}
+.jamiyat-havolalar a {
+  color: #bbb;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.jamiyat-havolalar a:hover {
+  color: #00bcd4;
+  text-shadow: 0 0 8px #00bcd4;
+}

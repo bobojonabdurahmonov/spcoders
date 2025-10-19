@@ -46,10 +46,23 @@ function App() {
 
   useEffect(() => {
     getStatus();
+
+    fetch("http://127.0.0.1:8000/check-session/", {
+      // method: "GET",
+      // credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        if (data.authenticated) {
+          setEnteredPlatform(true);
+        }
+        });
   }, []);
 
   const trynow = () => {
     setEnteredPlatform(true);
+    console.log("Moved to MainPage")
   };
 
   return (
@@ -57,7 +70,7 @@ function App() {
       {enteredPlatform ? (
         <Home />
       ) : authType ? (
-        <Auth type={authType === "login" ? "login" : "register"} />
+        <Auth type={authType === "login" ? "login" : "register"} onSuccess={() => setEnteredPlatform(true)} />
       ) : (
         <div
           className="main-bg"
@@ -154,7 +167,7 @@ function App() {
                 <p className="hero-subtitle">
                   Share your thoughts, get feedback, and grow together.
                 </p>
-                <button className="btn">Explore Community</button>
+                <a href="https://t.me/spcodersceo" target="_blank"><button className="btn">Explore Community</button></a>
               </section>
             </div>
 
@@ -259,7 +272,6 @@ function App() {
                 <p className="hero-subtitle">
                   A platform built for coders to connect, share, and inspire.
                 </p>
-                <button className="btn-outline">Learn More</button>
               </section>
             </div>
           </Slider>

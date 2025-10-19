@@ -1,0 +1,96 @@
+.loyihalar-sahifa {
+  color: white;
+  padding: 30px;
+  background-color: #0c0c0c;
+  min-height: 100vh;
+}
+
+.loyihalar-sahifa h2 {
+  color: #00bcd4;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.loyihalar-tarmoq {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+}
+
+.loyiha-karta {
+  background: #121212;
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  padding: 20px;
+  transition: 0.3s ease;
+}
+
+.loyiha-karta:hover {
+  transform: translateY(-4px);
+  border-color: #00bcd4;
+}
+
+.loyiha-bosh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loyiha-bosh h3 {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.holat {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ochiq {
+  background-color: #00bcd4;
+  color: #000;
+}
+
+.yopiq {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.loyiha-tavsif {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 12px 0;
+  line-height: 1.4;
+}
+
+.loyiha-past {
+  margin-top: 10px;
+}
+
+.jarayon {
+  background: #222;
+  border-radius: 10px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.jarayon-bar {
+  background: #00bcd4;
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.loyiha-malumot {
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
+
+.loyiha-malumot .sana {
+  color: #00bcd4;
+}

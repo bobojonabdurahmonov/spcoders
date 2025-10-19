@@ -1,0 +1,76 @@
+.inbox-wrapper {
+  padding: 25px;
+  color: white;
+}
+
+.inbox-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.chatsblock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 🔹 Har bir user uchun uzun div */
+.chat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 18px;
+  transition: 0.3s ease;
+}
+
+.chat-item:hover {
+  background: rgba(0, 191, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* 🔹 Chap tomondagi avatar va info */
+.chatavatar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.chatavatar img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00bfff;
+}
+
+.chat-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.chat-info p {
+  margin: 3px 0 0;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* 🔹 O‘ng tomondagi tugma */
+.chatbtn button {
+  background: #00bfff;
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.chatbtn button:hover {
+  background: #0095cc;
+}

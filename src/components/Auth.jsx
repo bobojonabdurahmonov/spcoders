@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Auth.css";
 
-export default function Auth({ type = "login" }) {
+export default function Auth({ type = "login", onSuccess }) {
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -12,45 +12,64 @@ export default function Auth({ type = "login" }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(type === "login" ? "Login data:" : "Register data:", form);
-  };
-
   const registerUser = () => {
+    const formData = new FormData();
+    formData.append("username", form.username);
+    formData.append("email", form.email);
+    formData.append("password", form.password);
+    if (form.profile_pic) formData.append("profile_pic", form.profile_pic);
+
     fetch("http://localhost:8000/register/", {
       method: "POST",
+      body: formData, 
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          sessionStorage.setItem("user", JSON.stringify({
+            username: data.username,
+            email: data.email,
+            profile_pic: data.profile_pic
+          }));
+          window.location.href = "/";
+        } else {
+          alert(data.message);
+        }
+      });
+  };
+
+
+  const logInUser = () => {
+    fetch("http://127.0.0.1:8000/login/", {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
       body: JSON.stringify({
         username: form.username,
-        email: form.email,
         password: form.password,
       }),
     })
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
+          sessionStorage.setItem("user", JSON.stringify({
+            username: form.username,
+            email: form.email
+          }));
+          
+          onSuccess(); 
+        } else {
+          alert(data.message);
+        }
+      });
+  };
 
-  const logInUser = () => {
-    fetch("http://localhost:8000/login/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: form.username,
-        password: form.password, 
-      }),
-    })
-      .then(res => res.json())
-      .then(data => console.log(data));
-  }
-
-  const authUser = () => {
-    if(type == "login") {
-      logInUser()
-    } else {
-      registerUser()
-    }
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (type === "login") logInUser();
+    else registerUser();
+  };
 
   return (
     <div className="auth-container">
@@ -62,25 +81,25 @@ export default function Auth({ type = "login" }) {
       </p>
 
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={form.username}
+          onChange={handleChange}
+          required
+        />
+
         {type === "register" && (
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={form.username}
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
             onChange={handleChange}
             required
           />
         )}
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
 
         <input
           type="password"
@@ -91,7 +110,7 @@ export default function Auth({ type = "login" }) {
           required
         />
 
-        <button type="submit" onClick={() => authUser()}>
+        <button type="submit">
           {type === "login" ? "Login" : "Register"}
         </button>
       </form>
