@@ -1,75 +1,35 @@
 import React, { useState } from "react";
-import Inbox from "./Chats";
-import Settings from "./Settings";
-import Dashboard from "./Dashboard";
-import ProjectsBlock from "./ProjectsHome";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function Entry() {
-  const [activePage, setActivePage] = useState("home");
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleNavClick = (page) => {
-    setActivePage(page);
-  };
-
-  const renderPage = () => {
-    switch (activePage) {
-      case "home":
-        return (
-          <>
-            <Dashboard />
-          </>
-        );
-
-      case "projects":
-        return (
-          <div className="projects-page">
-            <ProjectsBlock />
-          </div>
-        );
-
-      case "chat":
-        return (
-          <div className="chat-page">
-            <Inbox />
-          </div>
-        );
-
-      case "settings":
-        return (
-          <div className="settings-page">
-            <Settings />
-          </div>
-        );
-
-      case "achievements":
-        return (
-          <div className="achievements-page">
-            <h1>🏆 Achievements</h1>
-            <p>Track your progress and ranks.</p>
-          </div>
-        );
-
-      default:
-        return <h1>Welcome!</h1>;
-    }
-  };
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <div className="page entry">
       <div className="dashboard-grid">
-        {/* ✅ Chap paneldagi tugmalar */}
-        <aside className="left-rail">
-          <button className="icon-btn" onClick={() => handleNavClick("home")}>💼</button>
-          <button className="icon-btn" onClick={() => handleNavClick("projects")}>📁</button>
-          <button className="icon-btn" onClick={() => handleNavClick("chat")}>💬</button>
-          <button className="icon-btn" onClick={() => handleNavClick("settings")}>⚙</button>
-          <button className="icon-btn" onClick={() => handleNavClick("achievements")}>🏆</button>
+        {/* ✅ Chap panel (yon navigatsiya) */}
+        <aside className={`left-rail ${menuOpen ? "open" : ""}`}>
+          <button className="icon-btn" onClick={() => navigate("/dashboard")}>💼</button>
+          <button className="icon-btn" onClick={() => navigate("/projects")}>📁</button>
+          <button className="icon-btn" onClick={() => navigate("/chats")}>💬</button>
+          <button className="icon-btn" onClick={() => navigate("/settings")}>⚙</button>
+          <button className="icon-btn" onClick={() => navigate("/achievements")}>🏆</button>
           <div className="add-floating">+</div>
         </aside>
 
-        {/* ✅ O‘ngdagi asosiy kontent */}
+        {/* 🔥 Mobil uchun hamburger menyu */}
+        <div className="entry-hamburger" onClick={toggleMenu}>
+          <div className={menuOpen ? "bar active" : "bar"}></div>
+          <div className={menuOpen ? "bar active" : "bar"}></div>
+          <div className={menuOpen ? "bar active" : "bar"}></div>
+        </div>
+
+        {/* ✅ O‘ng tomondagi kontent joyi */}
         <main className="dashboard-main">
-          {renderPage()}
+          <Outlet />
         </main>
       </div>
     </div>

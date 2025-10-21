@@ -1,49 +1,73 @@
-import React, { useEffect, useState } from "react";
-import userlogo from "../assets/nonuser.png";
-import "./Profile.css"
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import "./Profile.css";
+import nonuserlogo from "../assets/nonuser.png";
 
-export default function Profile() {
-  const [projectsCount, setProjectsCount] = useState(0);
+function Profile() {
+  const [activeTab, setActiveTab] = useState("overview");
+  const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
-  
-  useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/"); 
+  };
 
   return (
-    <div className="profil-sahifa">
-      <div className="profil-bosh">
-        <img src={userlogo} alt="avatar" className="profil-avatar" />
-        <div className="profil-info">
-          <h2 className="profil-nomi">{user ? user.username : "Guest"}</h2>
-          <p className="profil-tag">@{user ? user.username : "Guest"}</p>
-          <p className="profil-bio">Frontend Developer</p>
+    <div className="profile-container">
+      {/* === HEADER === */}
+      <div className="profile-header">
+        <img
+          className="profile-avatar"
+          src={nonuserlogo}
+          alt="avatar"
+        />
+        <div className="profile-info">
+          <h1 className="profile-name">Bobojon</h1>
+          <p className="profile-bio">Full Stack Developer • React + Django</p>
         </div>
+
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
 
-      <div className="profil-statlar">
-        <div className="stat-item">
-          <div className="stat-soni">{projectsCount}</div>
-          <div className="stat-nomi">Projects</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-soni">3</div>
-          <div className="stat-nomi">Achievements</div>
-        </div>
-        <div className="stat-item">
-          <div className="stat-soni">120</div>
-          <div className="stat-nomi">Followers</div>
-        </div>
+      {/* === NAVIGATION === */}
+      <div className="profile-nav">
+        <button
+          className={activeTab === "overview" ? "active" : ""}
+          onClick={() => {
+            setActiveTab("overview")
+            navigate("/profile/overview")
+          }}
+        >
+          Overview
+        </button>
+        <button
+          className={activeTab === "projects" ? "active" : ""}
+          onClick={() => {
+            setActiveTab("projects")
+            navigate("/profile/projects")
+          }}
+        >
+          Projects
+        </button>
+        <button
+          className={activeTab === "settings" ? "active" : ""}
+          onClick={() => {
+            setActiveTab("settings");
+            navigate("/profile/settings");
+          }}
+        >
+          Settings
+        </button>
       </div>
 
-      <div className="profil-harakatlar">
-        <button className="tugma-outline">Edit Profile</button>
-        <button className="tugma-asosiy">Settings</button>
+      {/* === CONTENT === */}
+      <div className="profile-content">
+        <Outlet />
       </div>
     </div>
   );
 }
+
+export default Profile;

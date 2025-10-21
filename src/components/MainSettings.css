@@ -1,0 +1,101 @@
+/* Umumiy stil - hech qanday alohida block yo‘q */
+.settings-wrapper {
+  width: 100%;
+  color: #e4e4e4;
+  padding: 20px 60px;
+  background: transparent;
+}
+
+.settings-header-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.settings-header-row h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-group label {
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.setting-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+.setting-inline span {
+  color: #ddd;
+}
+
+.setting-group select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.setting-group select:hover {
+  border-color: rgba(255,255,255,0.3);
+}
+
+.settings-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.save-btn {
+  background: #238636;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.save-btn:hover {
+  background: #2ea043;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #ccc;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  color: #fff;
+  border-color: #fff;
+}

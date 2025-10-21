@@ -1,0 +1,133 @@
+:root {
+  --bg: #0d1117;
+  --card-bg: #161b22;
+  --locked-bg: #1a1f25;
+  --text: #c9d1d9;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --accent: #2f81f7;
+  --accent-dark: #1f6feb;
+  --success: #2ea043;
+  --danger: #f85149;
+  --radius: 10px;
+  --transition: 0.3s ease;
+}
+
+.achievements-page {
+  padding: 60px 100px;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: var(--transition);
+}
+
+.achievements-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.achievements-sub {
+  color: var(--text-muted);
+  margin-bottom: 35px;
+  font-size: 15px;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* === CARD BASE === */
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  transition: var(--transition);
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+/* === COLLECTED CARD === */
+.achievement-card.collected {
+  background: linear-gradient(145deg, #1a1f27, #10151b);
+  border-color: rgba(47, 129, 247, 0.4);
+}
+
+/* === LOCKED CARD === */
+.achievement-card.locked {
+  background: var(--locked-bg);
+  border-color: rgba(248, 81, 73, 0.4);
+  opacity: 0.9;
+  filter: grayscale(20%);
+}
+
+/* === ICON === */
+.achievement-icon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+/* === INFO === */
+.achievement-info h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.achievement-info p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 6px 0 14px;
+}
+
+/* === BUTTONS === */
+.collect-btn {
+  border: none;
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.collected-btn {
+  background: var(--success);
+  color: white;
+  opacity: 0.8;
+}
+
+.collected-btn:hover {
+  opacity: 1;
+}
+
+.locked-btn {
+  background: var(--danger);
+  color: white;
+}
+
+.locked-btn:hover {
+  background: #e0352f;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .achievements-page {
+    padding: 30px 20px;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}

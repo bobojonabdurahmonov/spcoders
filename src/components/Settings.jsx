@@ -1,115 +1,94 @@
 import React, { useState } from "react";
-import "./Settings.css";
+import "./MainSettings.css";
 
-export default function Settings() {
-  const [editField, setEditField] = useState(null);
-  const [username, setUsername] = useState("Bobojon");
-  const [email, setEmail] = useState("bobojon@example.com");
-  const [isPublic , setIsPublic] = useState(true);
+function Settings({ onBack }) {
+  const [darkMode, setDarkMode] = useState(true);
+  const [notifications, setNotifications] = useState(true);
+  const [language, setLanguage] = useState("English");
+  const [sound, setSound] = useState(true);
+  const [privacy, setPrivacy] = useState(true);
 
-
-  const handleSave = () => {
-    setEditField(null);
-    alert("✅ Changes saved!");
+  const handleSave = (e) => {
+    e.preventDefault();
+    alert("Settings saved successfully!");
   };
 
   return (
-    <div className="settings-inline">
-      <h2>⚙ Settings</h2>
-
-      {/* Username */}
-      <div className="setting-item">
-        <div
-          className="setting-label"
-          onClick={() => setEditField(editField === "username" ? null : "username")}
-        >
-          <strong>Username:</strong> <span>{username}</span>
-        </div>
-
-        {editField === "username" && (
-          <div className="edit-area">
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter new username"
-            />
-            <button onClick={handleSave}>Save</button>
-          </div>
-        )}
+    <div className="settings-wrapper">
+      <div className="settings-header-row">
+        <h2>Settings</h2>
       </div>
 
-      {/* Email */}
-      <div className="setting-item">
-        <div
-          className="setting-label"
-          onClick={() => setEditField(editField === "email" ? null : "email")}
-        >
-          <strong>Email:</strong> <span>{email}</span>
-        </div>
-
-        {editField === "email" && (
-          <div className="edit-area">
+      <form onSubmit={handleSave} className="settings-form">
+        <div className="setting-group">
+          <label>Theme</label>
+          <div className="setting-inline">
+            <span>{darkMode ? "Dark Mode" : "Light Mode"}</span>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter new email"
+              type="checkbox"
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
             />
-            <button onClick={handleSave}>Save</button>
           </div>
-        )}
-      </div>
-
-      {/* Password */}
-      <div className="setting-item">
-        <div
-          className="setting-label"
-          onClick={() => setEditField(editField === "password" ? null : "password")}
-        >
-          <strong>Password:</strong> <span>********</span>
         </div>
 
-        {editField === "password" && (
-          <div className="edit-area">
+        <div className="setting-group">
+          <label>Notifications</label>
+          <div className="setting-inline">
+            <span>{notifications ? "Enabled" : "Disabled"}</span>
             <input
-              type="password"
-              placeholder="Enter new password"
+              type="checkbox"
+              checked={notifications}
+              onChange={() => setNotifications(!notifications)}
             />
-            <button onClick={handleSave}>Save</button>
           </div>
-        )}
-      </div>
-
-      <div className="setting-item">
-        <div
-            className="setting-label"
-            onClick={() =>
-            setEditField(editField === "project" ? null : "project")
-            }
-        >
-            <strong>Showing Projects:</strong>{" "}
-            <span className="status-text">{isPublic ? "Public" : "Private"}</span>
         </div>
 
-        {editField === "project" && (
-            <div className="toggle-area">
-            <button
-                className={isPublic ? "active" : ""}
-                onClick={() => setIsPublic(true)}
-            >
-                Public
-            </button>
-            <button
-                className={!isPublic ? "active" : ""}
-                onClick={() => setIsPublic(false)}
-            >
-                Private
-            </button>
-            </div>
-        )}
+        <div className="setting-group">
+          <label>Language</label>
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
+            <option>English</option>
+            <option>Uzbek</option>
+            <option>Russian</option>
+            <option>Turkish</option>
+          </select>
         </div>
+
+        <div className="setting-group">
+          <label>Sound Effects</label>
+          <div className="setting-inline">
+            <span>{sound ? "On" : "Off"}</span>
+            <input
+              type="checkbox"
+              checked={sound}
+              onChange={() => setSound(!sound)}
+            />
+          </div>
+        </div>
+
+        <div className="setting-group">
+          <label>Privacy</label>
+          <div className="setting-inline">
+            <span>{privacy ? "Show Online" : "Appear Offline"}</span>
+            <input
+              type="checkbox"
+              checked={privacy}
+              onChange={() => setPrivacy(!privacy)}
+            />
+          </div>
+        </div>
+
+        <div className="settings-actions">
+          <button type="submit" className="save-btn">
+            Save changes
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
 
+export default Settings;

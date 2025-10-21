@@ -690,3 +690,114 @@ body, #root { height: 100%; background: #050606; }
   .project-form input, .project-form textarea { width:100%; }
   .search input { width:140px; }
 }
+
+/* 🔥 Mobil menyu uchun hamburger icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: 14px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: #e8eef1;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* animatsiya: menyu ochilganda */
+.bar.active:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.bar.active:nth-child(2) {
+  opacity: 0;
+}
+.bar.active:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* 🔹 Nav menyu mobil versiyada yashiriladi */
+@media (max-width: 850px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    gap: 16px;
+    transform: translateY(-120%);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .search {
+    display: none;
+  }
+}
+
+/* 🔹 Mobil uchun hamburger menyu Entry sahifada */
+.entry-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 200;
+}
+
+.entry-hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #e8eef1;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.entry-hamburger .bar.active:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.entry-hamburger .bar.active:nth-child(2) {
+  opacity: 0;
+}
+.entry-hamburger .bar.active:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* 🔸 Mobil versiyada left-rail yashirilsin */
+@media (max-width: 850px) {
+  .left-rail {
+    position: fixed;
+    left: -120px;
+    transition: all 0.3s ease;
+    z-index: 150;
+  }
+
+  .left-rail.open {
+    left: 0;
+  }
+
+  .entry-hamburger {
+    display: flex;
+  }
+
+  .dashboard-main {
+    padding-left: 0;
+  }
+}
