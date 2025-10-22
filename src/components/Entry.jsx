@@ -17,7 +17,7 @@ export default function Entry() {
           <button className="icon-btn" onClick={() => navigate("/chats")}>💬</button>
           <button className="icon-btn" onClick={() => navigate("/settings")}>⚙</button>
           <button className="icon-btn" onClick={() => navigate("/achievements")}>🏆</button>
-          <div className="add-floating">+</div>
+          <div className="add-floating" onClick={() => navigate("/add-project")}>+</div>
         </aside>
 
         {/* 🔥 Mobil uchun hamburger menyu */}

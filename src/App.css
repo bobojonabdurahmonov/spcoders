@@ -692,12 +692,26 @@ body, #root { height: 100%; background: #050606; }
 }
 
 /* 🔥 Mobil menyu uchun hamburger icon */
+/* 🔥 Yangi hamburger */
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
+  width: 28px;
+  height: 24px;
   cursor: pointer;
-  margin-left: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background: #e8eef1;
+  border-radius: 3px;
+  transition: all 0.35s ease;
+  transform-origin: center;
 }
 
 .bar {
@@ -781,23 +795,78 @@ body, #root { height: 100%; background: #050606; }
 }
 
 /* 🔸 Mobil versiyada left-rail yashirilsin */
+/* ===============================
+   📱 Mobile bottom navigation bar
+   =============================== */
 @media (max-width: 850px) {
   .left-rail {
     position: fixed;
-    left: -120px;
-    transition: all 0.3s ease;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    transition: none;
     z-index: 150;
   }
 
-  .left-rail.open {
-    left: 0;
+  .icon-btn {
+    flex: 1;
+    max-width: 60px;
+    height: 50px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    color: #e8eef1;
+    transition: 0.3s;
   }
 
-  .entry-hamburger {
+  .icon-btn:hover {
+    transform: scale(1.15);
+    background: none;
+  }
+
+  .add-floating {
+    position: absolute;
+    bottom: 85px; /* oldin 50px edi — biroz yuqoriga ko‘tarildi */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #00bfff;
+    color: #041217;
+    font-weight: 700;
+    font-size: 26px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4);
+    transition: 0.3s ease;
+    z-index: 160; /* har doim nav iconlardan ustun chiqsin */
   }
 
+  .add-floating:hover {
+    transform: translateX(-50%) scale(1.1);
+  }
+
+
+  /* 🔥 Hamburger mobilda yashiriladi */
+  .entry-hamburger {
+    display: none;
+  }
+
+  /* 🔹 Asosiy content pastdagi nav uchun joy qoldiradi */
   .dashboard-main {
+    padding-bottom: 80px;
     padding-left: 0;
   }
 }
+

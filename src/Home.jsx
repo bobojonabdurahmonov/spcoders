@@ -15,6 +15,7 @@ import Achievements from "./components/Achievements";
 import Overview from "./components/OverviewProfile";
 import ProjectsProfile from "./components/ProjectsProfile";
 import SearchPage from "./components/SearchPage";
+import AddProject from "./components/AddProject";
 
 function Home() {
   return (
@@ -44,6 +45,7 @@ function Home() {
               <Route path="projects" element={<ProjectsProfile />} />
             </Route>
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/add-project" element={<AddProject />} />
           </Routes>
         </div>
       </div>

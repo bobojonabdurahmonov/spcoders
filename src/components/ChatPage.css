@@ -62,3 +62,84 @@
   border-radius: 20px;
   cursor: pointer;
 }
+
+/* ===============================
+   📱 MOBILE RESPONSIVE DESIGN
+   =============================== */
+@media (max-width: 850px) {
+  .chatpage {
+    padding: 15px;
+  }
+
+  .chat-header {
+    gap: 8px;
+  }
+
+  .chat-header h2 {
+    font-size: 1.1rem;
+    text-align: center;
+    flex: 1;
+  }
+
+  .back-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .chat-body {
+    height: 65vh;
+    padding: 8px;
+    margin: 10px 0;
+    font-size: 0.9rem;
+  }
+
+  .chat-msg {
+    margin: 6px 0;
+  }
+
+  .chat-input {
+    gap: 6px;
+  }
+
+  .chat-input input {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .chat-input button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+/* 🔹 Juda kichik ekran (425px dan past) uchun */
+@media (max-width: 425px) {
+  .chatpage {
+    padding: 10px;
+  }
+
+  .chat-header h2 {
+    font-size: 1rem;
+  }
+
+  .chat-body {
+    height: 60vh;
+    font-size: 0.85rem;
+  }
+
+  .chat-input {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .chat-input input {
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .chat-input button {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
