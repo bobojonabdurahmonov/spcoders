@@ -1,0 +1,111 @@
+/* Full-screen dark glassy overlay */
+.wl-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #0a0c14 40%, #06070d 100%);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Stylish glowing card */
+.wl-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 50px 70px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 60px rgba(0, 119, 255, 0.2),
+              0 0 10px rgba(255, 255, 255, 0.05) inset;
+  transform: translateY(12px) scale(0.96);
+  opacity: 0;
+  animation: wl-fadein 0.8s ease forwards;
+}
+
+/* Neon glow behind the card */
+.wl-glow {
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  background: conic-gradient(from 180deg, #00bfff, #ff0080, #ffd166, #00bfff);
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: -1;
+  animation: wl-rotate 6s linear infinite;
+}
+
+/* Rotating gradient ring (spinner) */
+.wl-spinner {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.05);
+  border-top: 5px solid #00bfff;
+  animation: wl-spin 1s linear infinite;
+}
+
+/* Welcome text */
+.wl-welcome {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  letter-spacing: -0.02em;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  animation: wl-slide 0.8s ease forwards;
+}
+
+/* Highlight username with golden glow */
+.wl-username {
+  color: #ffd166;
+  display: inline-block;
+  animation: wl-bounce 0.9s cubic-bezier(.22,.9,.35,1) 0.3s both;
+}
+
+/* Subtext */
+.wl-sub {
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes wl-fadein {
+  from { opacity: 0; transform: translateY(20px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes wl-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes wl-slide {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes wl-bounce {
+  0% { transform: translateY(10px) scale(0.98); opacity: 0; }
+  60% { transform: translateY(-6px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes wl-rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive tweaks */
+@media (max-width: 520px) {
+  .wl-card {
+    padding: 30px;
+  }
+  .wl-welcome {
+    font-size: 30px;
+  }
+  .wl-spinner {
+    width: 50px;
+    height: 50px;
+  }
+}

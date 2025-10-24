@@ -7,17 +7,17 @@ export default function Auth({ type = "login", onSuccess }) {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const registerUser = () => {
-    fetch("http://localhost:8000/api/register/", {
+    setLoading(true);
+    fetch("http://127.0.0.1:8000/api/register/", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
         username: form.username,
@@ -27,7 +27,9 @@ export default function Auth({ type = "login", onSuccess }) {
     })
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         console.log("Register response:", data);
+
         if (data.status === "success") {
           sessionStorage.setItem(
             "user",
@@ -36,17 +38,20 @@ export default function Auth({ type = "login", onSuccess }) {
               email: form.email,
             })
           );
-          window.location.href = "/";
+          // ✅ loader uchun username yuboramiz
+          onSuccess(form.username);
         } else {
           alert(data.message || "Registration failed");
         }
       })
-      .catch((err) => console.error("Error:", err));
+      .catch((err) => {
+        setLoading(false);
+        console.error("Error:", err);
+      });
   };
 
-
-
   const logInUser = () => {
+    setLoading(true);
     fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,19 +63,28 @@ export default function Auth({ type = "login", onSuccess }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setLoading(false);
+        console.log("Login response:", data);
+
         if (data.status === "success") {
-          sessionStorage.setItem("user", JSON.stringify({
-            username: data.username,
-            email: data.email,
-            profilepic: data.profile_pic,
-            biography: data.biography
-          }));
-          
-          onSuccess(); 
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify({
+              username: data.username,
+              email: data.email,
+              profilepic: data.profile_pic,
+              biography: data.biography,
+            })
+          );
+          // ✅ loader uchun username yuboramiz
+          onSuccess(data.username);
         } else {
-          alert(data.message);
+          alert(data.message || "Invalid credentials");
         }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error("Error:", err);
       });
   };
 
@@ -119,8 +133,12 @@ export default function Auth({ type = "login", onSuccess }) {
           required
         />
 
-        <button type="submit">
-          {type === "login" ? "Login" : "Register"}
+        <button type="submit" disabled={loading}>
+          {loading
+            ? "Please wait..."
+            : type === "login"
+            ? "Login"
+            : "Register"}
         </button>
       </form>
 
@@ -128,12 +146,22 @@ export default function Auth({ type = "login", onSuccess }) {
         {type === "login" ? (
           <>
             Don’t have an account?{" "}
-            <a href="/register">Register</a>
+            <span
+              className="switch-link"
+              onClick={() => window.location.reload()}
+            >
+              Register
+            </span>
           </>
         ) : (
           <>
             Already have an account?{" "}
-            <a href="/login">Login</a>
+            <span
+              className="switch-link"
+              onClick={() => window.location.reload()}
+            >
+              Login
+            </span>
           </>
         )}
       </p>

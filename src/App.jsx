@@ -6,16 +6,15 @@ import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Auth from "./components/Auth";
+import WelcomeLoader from "./loader/Loader";
 import Home from "./Home";
 
 function App() {
   const [authType, setAuthType] = useState(null);
   const sliderRef = useRef(null);
   const [enteredPlatform, setEnteredPlatform] = useState(false);
-
-  function changetoRegisterorLogin(type) {
-    setAuthType(type);
-  }
+  const [username, setUsername] = useState("");
+  const [loadingWelcome, setLoadingWelcome] = useState(false);
 
   const settings = {
     dots: true,
@@ -38,36 +37,68 @@ function App() {
   const getStatus = () => {
     fetch("http://127.0.0.1:8000/api/")
       .then((response) => response.json())
-      .then((data) => {
-        console.log("Status:", data.status);
-      })
+      .then((data) => console.log("Status:", data.status))
       .catch(() => console.log("error"));
   };
 
   useEffect(() => {
     const checkSession = async () => {
-      const storedUser = sessionStorage.getItem("user");
-      if (storedUser) {
-        setEnteredPlatform(true);
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/check-session/", {
+          method: "GET",
+          credentials: "include", // muhim!
+        });
+        const data = await res.json();
+
+        if (data.status === "success") {
+          setUsername(data.username);
+          setEnteredPlatform(true);
+        } else {
+          const storedUser = sessionStorage.getItem("user");
+          if (storedUser) {
+            const parsed = JSON.parse(storedUser);
+            setUsername(parsed.username);
+            setEnteredPlatform(true);
+          }
+        }
+      } catch (err) {
+        console.error("Session check error:", err);
       }
     };
 
-    getStatus()
+    getStatus();
     checkSession();
   }, []);
 
-
   const trynow = () => {
+    setUsername("Guest");
+    setLoadingWelcome(true);
+    // loader tugagach Home ochiladi
+  };
+
+  const handleAuthSuccess = (username) => {
+    setUsername(username);
+    setLoadingWelcome(true);
+  };
+
+  const handleLoaderFinish = () => {
+    setLoadingWelcome(false);
     setEnteredPlatform(true);
-    console.log("Moved to MainPage")
   };
 
   return (
     <>
-      {enteredPlatform ? (
-        <Home />
+      {loadingWelcome ? (
+        <WelcomeLoader
+          visible={true}
+          username={username}
+          duration={1500}
+          onFinish={handleLoaderFinish}
+        />
+      ) : enteredPlatform ? (
+        <Home username={username} />
       ) : authType ? (
-        <Auth type={authType === "login" ? "login" : "register"} onSuccess={() => setEnteredPlatform(true)}/>
+        <Auth type={authType === "login" ? "login" : "register"} onSuccess={handleAuthSuccess} />
       ) : (
         <div
           className="main-bg"
@@ -92,13 +123,13 @@ function App() {
             <div className="nav-buttons">
               <button
                 className="btn"
-                onClick={() => changetoRegisterorLogin("register")}
+                onClick={() => setAuthType("register")}
               >
                 Register
               </button>
               <button
                 className="btn-outline"
-                onClick={() => changetoRegisterorLogin("login")}
+                onClick={() => setAuthType("login")}
               >
                 SignIn
               </button>
