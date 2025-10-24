@@ -36,7 +36,7 @@ function App() {
   };
 
   const getStatus = () => {
-    fetch("http://127.0.0.1:8000/")
+    fetch("http://127.0.0.1:8000/api/")
       .then((response) => response.json())
       .then((data) => {
         console.log("Status:", data.status);
@@ -45,20 +45,17 @@ function App() {
   };
 
   useEffect(() => {
-    getStatus();
+    const checkSession = async () => {
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        setEnteredPlatform(true);
+      }
+    };
 
-    fetch("http://127.0.0.1:8000/check-session/", {
-      // method: "GET",
-      // credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        if (data.authenticated) {
-          setEnteredPlatform(true);
-        }
-        });
+    getStatus()
+    checkSession();
   }, []);
+
 
   const trynow = () => {
     setEnteredPlatform(true);
@@ -70,7 +67,7 @@ function App() {
       {enteredPlatform ? (
         <Home />
       ) : authType ? (
-        <Auth type={authType === "login" ? "login" : "register"} onSuccess={() => setEnteredPlatform(true)} />
+        <Auth type={authType === "login" ? "login" : "register"} onSuccess={() => setEnteredPlatform(true)}/>
       ) : (
         <div
           className="main-bg"

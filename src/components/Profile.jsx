@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import "./Profile.css";
 import nonuserlogo from "../assets/nonuser.png";
@@ -6,11 +6,39 @@ import nonuserlogo from "../assets/nonuser.png";
 function Profile() {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
+  const [userpic, setUserpic] = useState('')
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/"); 
-  };
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    if (storedUser) {
+      try {
+        setUserpic(JSON.parse(storedUser));
+      } catch (e) {
+        console.error("Failed to parse user data:", e);
+      }
+    }
+  }, []);
+
+
+  const handleLogout = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/logout/", {
+          method: "POST",
+          credentials: "include",
+        });
+
+        const data = await response.json();
+        console.log("Logout response:", data);
+
+        if (data.status === "success") {
+          window.location.href = "/";
+          sessionStorage.removeItem("user");
+        }
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    };
+
 
   return (
     <div className="profile-container">
@@ -18,12 +46,12 @@ function Profile() {
       <div className="profile-header">
         <img
           className="profile-avatar"
-          src={nonuserlogo}
+          src={userpic && userpic.profilepic ? userpic.profilepic : nonuserlogo}
           alt="avatar"
         />
         <div className="profile-info">
           <h1 className="profile-name">Bobojon</h1>
-          <p className="profile-bio">Full Stack Developer • React + Django</p>
+          <p className="profile-bio">{userpic?.biography || "Coder"}</p>
         </div>
 
         <button className="logout-btn" onClick={handleLogout}>

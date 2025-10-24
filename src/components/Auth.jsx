@@ -13,34 +13,41 @@ export default function Auth({ type = "login", onSuccess }) {
   };
 
   const registerUser = () => {
-    const formData = new FormData();
-    formData.append("username", form.username);
-    formData.append("email", form.email);
-    formData.append("password", form.password);
-    if (form.profile_pic) formData.append("profile_pic", form.profile_pic);
-
-    fetch("http://localhost:8000/register/", {
+    fetch("http://localhost:8000/api/register/", {
       method: "POST",
-      body: formData, 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("Register response:", data);
         if (data.status === "success") {
-          sessionStorage.setItem("user", JSON.stringify({
-            username: data.username,
-            email: data.email,
-            profile_pic: data.profile_pic
-          }));
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify({
+              username: form.username,
+              email: form.email,
+            })
+          );
           window.location.href = "/";
         } else {
-          alert(data.message);
+          alert(data.message || "Registration failed");
         }
-      });
+      })
+      .catch((err) => console.error("Error:", err));
   };
 
 
+
   const logInUser = () => {
-    fetch("http://127.0.0.1:8000/login/", {
+    fetch("http://127.0.0.1:8000/api/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -54,8 +61,10 @@ export default function Auth({ type = "login", onSuccess }) {
         console.log(data);
         if (data.status === "success") {
           sessionStorage.setItem("user", JSON.stringify({
-            username: form.username,
-            email: form.email
+            username: data.username,
+            email: data.email,
+            profilepic: data.profile_pic,
+            biography: data.biography
           }));
           
           onSuccess(); 

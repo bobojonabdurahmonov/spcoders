@@ -8,13 +8,24 @@ function Navbar() {
   const location = useLocation();
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userpic, setUserpic] = useState('')
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    if (storedUser) {
+      try {
+        setUserpic(JSON.parse(storedUser));
+      } catch (e) {
+        console.error("Failed to parse user data:", e);
+      }
+    }
   }, []);
+
+
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -76,7 +87,7 @@ function Navbar() {
           <div className="user">
             <div className="avatar">
               <img
-                src={user?.profile_pic ? user.profile_pic : nonuserlogo}
+                src={user?.profilepic ? user.profilepic : nonuserlogo}
                 width={40}
                 height={40}
                 alt="user"
