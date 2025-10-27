@@ -1,27 +1,26 @@
 .add-project-page {
-  padding: 50px;
-  background: #0d1117;
-  color: #c9d1d9;
-  min-height: 100vh;
+  max-width: 600px;
+  margin: 50px auto;
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  transition: all 0.3s ease;
 }
 
 .add-project-page h1 {
-  font-size: 28px;
-  color: #58a6ff;
-  margin-bottom: 30px;
+  text-align: center;
+  color: #00d4ff;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
 }
 
 .project-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 600px;
-  background: rgba(22, 27, 34, 0.8);
-  padding: 30px;
-  border-radius: 10px;
-  border: 1px solid #30363d;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .form-group {
@@ -29,45 +28,126 @@
   flex-direction: column;
 }
 
-label {
-  margin-bottom: 8px;
-  color: #8b949e;
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
-input,
-textarea {
-  background: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 6px;
-  color: #c9d1d9;
+.form-group input,
+.form-group textarea {
   padding: 10px;
-  font-size: 15px;
+  border-radius: 8px;
+  border: none;
   outline: none;
-  transition: border 0.2s;
+  font-size: 0.95rem;
+  background-color: #2b2b2b;
+  color: white;
 }
 
-input:focus,
-textarea:focus {
-  border-color: #58a6ff;
-}
-
-textarea {
-  min-height: 100px;
-  resize: vertical;
+.form-group input:focus,
+.form-group textarea:focus {
+  border: 2px solid #00d4ff;
+  background-color: #252525;
 }
 
 .submit-btn {
-  background: #238636;
+  background: linear-gradient(90deg, #00d4ff, #0077ff);
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
+  transition: 0.3s ease;
 }
 
 .submit-btn:hover {
-  background: #2ea043;
-  transform: scale(1.02);
+  background: linear-gradient(90deg, #0077ff, #00d4ff);
+  transform: translateY(-2px);
+}
+
+.error-text {
+  color: #ff4f4f;
+  text-align: center;
+  font-weight: 500;
+}
+
+.form-group input[type="number"] {
+  width: 100%;
+  background-color: #2b2b2b;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.project-progress {
+  margin-top: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-switch {
+  width: 120px;
+  height: 40px;
+  background: #ddd;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  padding: 0 10px;
+  transition: background 0.3s ease;
+  font-weight: 600;
+}
+
+.toggle-switch.public {
+  background: linear-gradient(90deg, #4caf50, #2e7d32);
+  color: white;
+}
+
+.toggle-switch.private {
+  background: linear-gradient(90deg, #f44336, #b71c1c);
+  color: white;
+}
+
+.toggle-thumb {
+  width: 26px;
+  height: 26px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  left: 8px;
+  transition: left 0.3s ease;
+}
+
+.toggle-switch.public .toggle-thumb {
+  left: 85px;
+}
+
+.toggle-switch span {
+  z-index: 2;
+  font-size: 0.9rem;
 }

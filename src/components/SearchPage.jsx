@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import nonuserlogo from "../assets/nonuser.png"
 import "./SearchPanel.css";
 
 export default function SearchPage() {
@@ -12,7 +13,7 @@ export default function SearchPage() {
     if (query) {
       (async () => {
         try {
-          const res = await fetch(`http://127.0.0.1:8000/search?q=${query}`);
+          const res = await fetch(`http://127.0.0.1:8000/api/search?q=${query}`);
           const data = await res.json();
           setResults(data);
         } catch (err) {
@@ -62,11 +63,13 @@ export default function SearchPage() {
             <div key={i} className="result-card">
               {item.username ? (
                 <>
-                  <div className="result-icon">👤</div>
-                  <Link to={`/user/:id`} className="search-user-card">
-                    <img src={user.avatar} alt="avatar" />
-                    <div>{user.username}</div>
-                    </Link>
+                  <Link to={`/user/${item.id}`} className="search-user-card">
+                    <img src={item.avatar || nonuserlogo} alt="avatar" width={50} height={50}/>
+                    <div>
+                      <div>{item.username}</div>
+                      <div style={{ color: "#00bfff" }}>{item.biography || "No bio yet."}</div>
+                    </div>
+                  </Link>
                 </>
               ) : (
                 <>

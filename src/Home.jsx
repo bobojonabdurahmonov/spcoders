@@ -16,6 +16,8 @@ import Overview from "./components/OverviewProfile";
 import ProjectsProfile from "./components/ProjectsProfile";
 import SearchPage from "./components/SearchPage";
 import AddProject from "./components/AddProject";
+import ProjectDetail from "./components/ProjectDetail";
+import UserProfile from "./components/UserProfile";
 
 function Home() {
   return (
@@ -35,7 +37,9 @@ function Home() {
 
             {/* 🔹 Tashqi sahifalar */}
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/community" element={<Community />} />
+            <Route path="/user/:id" element={<UserProfile />} />
 
             {/* 🔹 Profile nested routing */}
             <Route path="/profile" element={<Profile />}>

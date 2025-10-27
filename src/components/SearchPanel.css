@@ -143,3 +143,16 @@
   text-align: center;
   margin-top: 20px;
 }
+
+.search-user-card {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.2s ease;
+}
+
+.search-user-card:hover {
+  color: #00bfff; /* hoverda rang o‘zgartirish (ixtiyoriy) */
+}

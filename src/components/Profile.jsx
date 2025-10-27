@@ -6,13 +6,15 @@ import nonuserlogo from "../assets/nonuser.png";
 function Profile() {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
-  const [userpic, setUserpic] = useState('')
+  const [userpic, setUserpic] = useState('');
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
       try {
         setUserpic(JSON.parse(storedUser));
+        setUser(JSON.parse(storedUser))
       } catch (e) {
         console.error("Failed to parse user data:", e);
       }
@@ -50,8 +52,8 @@ function Profile() {
           alt="avatar"
         />
         <div className="profile-info">
-          <h1 className="profile-name">Bobojon</h1>
-          <p className="profile-bio">{userpic?.biography || "Coder"}</p>
+          <h1 className="profile-name">{user?.username || "Guest"}</h1>
+          <p className="profile-bio">{user?.biography || "Coder"}</p>
         </div>
 
         <button className="logout-btn" onClick={handleLogout}>

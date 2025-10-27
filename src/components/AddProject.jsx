@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./AddProject.css";
@@ -8,24 +8,63 @@ export default function AddProject() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [tech, setTech] = useState("");
-  const [image, setImage] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [file, setFile] = useState(null);
+  const [isPublic, setIsPublic] = useState(true); 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ title, desc, tech, image });
-    alert("✅ Project added successfully (demo)");
-    navigate("/projects");
+    setLoading(true);
+    setError("");
+
+    const formData = new FormData();
+    formData.append("name", title);
+    formData.append("description", desc);
+    formData.append("technologies", tech);
+    formData.append("progress", progress);
+    formData.append("visibility", isPublic ? "public" : "private");
+    formData.append("user", user)
+    if (file) formData.append("image", file);
+
+    try {
+      const res = await fetch("http://localhost:8000/api/projects/create/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        alert("✅ Project added successfully!");
+        navigate("/projects");
+      } else {
+        const err = await res.text();
+        setError("❌ Failed to add project: " + err);
+      }
+    } catch (e) {
+      setError("❌ Server error: " + e.message);
+    } finally {
+      setLoading(false);
+    }
   };
+  
+  useEffect(() => {
+    const userObj = JSON.parse(sessionStorage.getItem("user"));
+    setUser(userObj?.id);
+  }, []);
+
 
   return (
     <motion.div
       className="add-project-page"
-      initial={{ opacity: 0, y: 50 }}   // pastdan boshlanadi
-      animate={{ opacity: 1, y: 0 }}   // tepaga chiqadi
-      exit={{ opacity: 0, y: 50 }}     // chiqayotganda pastga tushadi
-      transition={{ duration: 0.5, ease: "easeOut" }} // silliq o‘tish
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <h1>Add New Project</h1>
+
       <form className="project-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Project Title</label>
@@ -59,12 +98,37 @@ export default function AddProject() {
         </div>
 
         <div className="form-group">
-          <label>Project Image</label>
-          <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+          <label>Completion (%)</label>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={progress}
+            onChange={(e) => setProgress(e.target.value)}
+          />
         </div>
 
-        <button type="submit" className="submit-btn">
-          ➕ Add Project
+        {/* ✅ Visibility toggle */}
+        <div className="form-group toggle-group">
+          <label>Visibility</label>
+          <div
+            className={`toggle-switch ${isPublic ? "public" : "private"}`}
+            onClick={() => setIsPublic(!isPublic)}
+          >
+            <div className="toggle-thumb"></div>
+            <span>{isPublic ? "🌍 Public" : "🔒 Private"}</span>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <label>Project File (optional)</label>
+          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        </div>
+
+        {error && <p className="error-text">{error}</p>}
+
+        <button type="submit" className="submit-btn" disabled={loading}>
+          {loading ? "Uploading..." : "➕ Add Project"}
         </button>
       </form>
     </motion.div>

@@ -38,10 +38,7 @@ export default function Auth({ type = "login", onSuccess }) {
               email: form.email,
             })
           );
-          // ✅ loader uchun username yuboramiz
           onSuccess(form.username);
-        } else {
-          alert(data.message || "Registration failed");
         }
       })
       .catch((err) => {
@@ -70,13 +67,13 @@ export default function Auth({ type = "login", onSuccess }) {
           sessionStorage.setItem(
             "user",
             JSON.stringify({
+              id: data.userId, 
               username: data.username,
               email: data.email,
               profilepic: data.profile_pic,
               biography: data.biography,
             })
           );
-          // ✅ loader uchun username yuboramiz
           onSuccess(data.username);
         } else {
           alert(data.message || "Invalid credentials");

@@ -46,7 +46,7 @@ function App() {
       try {
         const res = await fetch("http://127.0.0.1:8000/api/check-session/", {
           method: "GET",
-          credentials: "include", // muhim!
+          credentials: "include",
         });
         const data = await res.json();
 
@@ -65,6 +65,8 @@ function App() {
         console.error("Session check error:", err);
       }
     };
+
+
 
     getStatus();
     checkSession();
@@ -132,9 +134,6 @@ function App() {
                 onClick={() => setAuthType("login")}
               >
                 SignIn
-              </button>
-              <button className="btn-outline" onClick={trynow}>
-                Try NOW
               </button>
             </div>
           </header>
